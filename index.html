@@ -1,0 +1,96 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Bliss Estética</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #F9E5E5; color: #333; }
+        header { background: #fff; color: #E7A2A2; padding: 1em; text-align: center; border-bottom: 2px solid #E7A2A2; }
+        .logo { width: 250px; height: 250px; object-fit: contain; margin-bottom: 10px; }
+        h1 { margin: 0; font-size: 2.5em; color: #E7A2A2; }
+        .subheading { font-size: 1.2em; margin-top: 0.5em; font-style: italic; color: #E7A2A2; }
+        main { max-width: 1200px; margin: 0 auto; padding: 1em; }
+        .menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1em; }
+        .menu-item { border: 2px solid #E7A2A2; border-radius: 10px; padding: 1em; text-align: center; background: #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s; }
+        .menu-item:hover { transform: translateY(-5px); }
+        .menu-item img { max-width: 100%; height: auto; border-radius: 5px; }
+        .menu-item button { background: #E7A2A2; color: #fff; border: none; padding: 0.5em 1em; cursor: pointer; margin-top: 1em; border-radius: 5px; font-weight: bold; transition: background 0.3s; }
+        .menu-item button:hover { background: #D88B8B; }
+        #cart { position: fixed; top: 1em; right: 1em; background: #E7A2A2; color: #fff; padding: 0.5em 1em; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        #cart-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 90%; width: 300px; max-height: 80vh; overflow-y: auto; }
+        #cart-items { list-style: none; padding: 0; }
+        #cart-items li { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .quantity-control { display: flex; align-items: center; }
+        .quantity-control button { background: #E7A2A2; color: #fff; border: none; padding: 5px 10px; cursor: pointer; font-weight: bold; }
+        .quantity-control span { margin: 0 10px; }
+        #cart-total { font-weight: bold; margin-top: 10px; }
+        #close-cart { position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 20px; }
+        #whatsapp-button { background: #25D366; color: #fff; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-top: 15px; width: 100%; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://i.imgur.com/BO7MAsU.png" alt="Logo Beauty Bliss Estética" class="logo">
+      <p> Amores 1145, Del Valle Norte, CDMX - Tel. 55 36 58 98 78 </p>
+      <p> Horario: Lunes a Viernes 9am - 7pm | Sábados 9am - 2pm
+    </header>
+    <button id="whatsapp-button" onclick="openWhatsApp()">📲 Haz tu cita por WhatsApp</button>
+    <main>
+        <div class="menu">
+            <div class="menu-item"><img src="https://freerangestock.com/thumbnail/149931/pair-of-elegant-hands-facing-each-other-on-white-background.jpg" alt="Manicure"><h3>Manicure Elegante</h3><p>$500.00</p><p>¡Las uñas perfectas para cualquier ocasión!</p><button onclick="addToCart('Manicure Elegante', 500.00)">Agregar al carrito</button></div>
+            <div class="menu-item"><img src="https://freerangestock.com/thumbnail/152654/beautician-giving-a-pedicure-painting-her-client-s-nails-in-a-beauty-centre..jpg" alt="Pedicure"><h3>Pedicure Deluxe</h3><p>Cuida tus pies con el mejor tratamiento.</p><p>$550.00</p><button onclick="addToCart('Pedicure Deluxe', 550.00)">Agregar al carrito</button></div>
+            <div class="menu-item"><img src="https://freerangestock.com/thumbnail/157134/a-woman-with-a-hand-on-her-face.jpg" alt="Facial Hidratante"><h3>Facial Hidratante</h3><p>Revitaliza tu piel con nuestra sesión facial.</p><p>$700.00</p><button onclick="addToCart('Facial Hidratante', 700.00)">Agregar al carrito</button></div>
+            <div class="menu-item"><img src="https://freerangestock.com/thumbnail/149989/woman-in-salon-with-hairdresser-washing-her-hair.jpg" alt="Tratamiento Capilar"><h3>Tratamiento Capilar</h3><p>Deja tu cabello sedoso y saludable.</p><p>$800.00</p><button onclick="addToCart('Tratamiento Capilar', 800.00)">Agregar al carrito</button></div>
+            <div class="menu-item"><img src="https://freerangestock.com/thumbnail/137663/profile-view-of-girl-with-perfect-skin-.jpg" alt="Maquillaje Completo"><h3>Maquillaje Completo</h3><p>Perfecto para cualquier evento especial.</p><p>$900.00</p><button onclick="addToCart('Maquillaje Completo', 900.00)">Agregar al carrito</button></div>
+            <div class="menu-item"><img src="https://freerangestock.com/thumbnail/157144/a-woman-sitting-on-a-bathtub.jpg" alt="Depilación Cera"><h3>Depilación con Cera</h3><p>Suave y efectiva.</p><p>$450.00</p><button onclick="addToCart('Depilación con Cera', 450.00)">Agregar al carrito</button></div>
+            <div class="menu-item"><img src="https://freerangestock.com/thumbnail/139330/two-women-with-spa-facial-treatment.jpg" alt="Mascarilla Facial"><h3>Mascarilla Facial</h3><p>Para una piel fresca y radiante.</p><p>$350.00</p><button onclick="addToCart('Mascarilla Facial', 350.00)">Agregar al carrito</button></div>
+            <div class="menu-item"><img src="https://freerangestock.com/thumbnail/137941/beautiful-woman-facing-camera-posed.jpg" alt="Diseño de Uñas"><h3>Diseño de Uñas Personalizado</h3><p>Creatividad y estilo en cada diseño.</p><p>$600.00</p><button onclick="addToCart('Diseño de Uñas Personalizado', 600.00)">Agregar al carrito</button></div>
+            <div class="menu-item"><img src="https://freerangestock.com/thumbnail/157182/a-woman-with-a-towel-on-her-head-applying-cream-on-her-face.jpg" alt="Retoque de Cejas"><h3>Retoque de Cejas</h3><p>Perfectamente definidas.</p><p>$400.00</p><button onclick="addToCart('Retoque de Cejas', 400.00)">Agregar al carrito</button></div>
+            <div class="menu-item"><img src="https://freerangestock.com/thumbnail/157148/a-woman-applying-a-face-cream.jpg" alt="Tratamiento de Piel"><h3>Tratamiento de Piel</h3><p>Cuida y rejuvenece tu piel.</p><p>$750.00</p><button onclick="addToCart('Tratamiento de Piel', 750.00)">Agregar al carrito</button></div>
+            <div class="menu-item"><img src="https://freerangestock.com/thumbnail/144334/women-laugh-together-with-face-masks.jpg" alt="Paquete de Belleza"><h3>Paquete de Belleza</h3><p>Incluye manicure, pedicure y facial.</p><p>$1500.00</p><button onclick="addToCart('Paquete de Belleza', 1500.00)">Agregar al carrito</button></div>
+            
+        </div>
+    </main>
+    <div id="cart">🛍️ Carrito</div>
+    <div id="cart-modal">
+        <span id="close-cart">&#10005;</span>
+        <h2>Carrito de Compras</h2>
+        <ul id="cart-items"></ul>
+        <div id="cart-total"></div>
+        <button id="whatsapp-button" onclick="checkout()">Ordenar por WhatsApp</button>
+    </div>
+    <script>
+        let cart = [];
+        function addToCart(name, price) {
+            const item = cart.find(i => i.name === name);
+            item ? item.quantity++ : cart.push({ name, price, quantity: 1 });
+            updateCart();
+        }
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            cartItems.innerHTML = cart.map(item => `<li>${item.name} <div class="quantity-control"><button onclick="changeQuantity('${item.name}', -1)">-</button><span>${item.quantity}</span><button onclick="changeQuantity('${item.name}', 1)">+</button></div> $${(item.price * item.quantity).toFixed(2)}</li>`).join('');
+            document.getElementById('cart-total').textContent = `Total: $${cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}`;
+        }
+        function changeQuantity(name, change) {
+            const item = cart.find(i => i.name === name);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) cart = cart.filter(i => i !== item);
+                updateCart();
+            }
+        }
+        function toggleCart() {
+            document.getElementById('cart-modal').style.display = document.getElementById('cart-modal').style.display === 'block' ? 'none' : 'block';
+        }
+        function checkout() {
+            const message = cart.map(item => `${item.quantity}x ${item.name} - $${(item.price * item.quantity).toFixed(2)}`).join('\n');
+            window.open(`https://wa.me/?text=${encodeURIComponent(message + `\n\nTotal: $${cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}`)}`);
+        }
+        document.getElementById('cart').onclick = toggleCart;
+        document.getElementById('close-cart').onclick = toggleCart;
+        function openWhatsApp() {
+            window.open('https://wa.me/525533355687'); // Reemplaza con tu número de WhatsApp
+        }
+    </script>
+</body>
+</html>
